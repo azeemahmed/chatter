@@ -5,6 +5,7 @@ gem 'rails', '3.2.9'
 group :development, :test do
   gem "sqlite3-ruby", :require => "sqlite3"
   gem 'rspec-rails'
+  gem 'guard-rspec'
 end
 
 group :production do
@@ -49,3 +50,14 @@ end
 # gem 'debugger'
 
 
+# Test gems on Windows
+group :test do
+gem 'rspec-rails'
+gem 'capybara'
+gem 'rb-fchange', '0.0.5'
+gem 'rb-notifu', '0.0.4'
+gem 'win32console', '1.3.0'
+end
+
+gem 'guard-spork', '0.3.2'
+gem 'spork', '0.9.0'

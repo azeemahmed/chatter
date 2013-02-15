@@ -2,6 +2,8 @@ require_relative '../spec_helper'
 
 describe "Static pages" do
 	
+	let(:base_title) { "Chatter Application" }
+	
 	describe "Home page" do
 	
 		it "should have the h1 'Chatter App'" do
@@ -9,11 +11,17 @@ describe "Static pages" do
 			page.should have_selector('h1', :text => 'Chatter App')
 		end
 		
-		it "should have the title 'Home'" do
+		it "should have the base title 'Home'" do
 			visit '/static_pages/home'
 			page.should have_selector('title',
-							:text => "Chatter Application | Home")
+							:text => "Chatter Application")
 		end
+		
+		it "should not have a custom page title" do
+			visit '/static_pages/home'
+			page.should_not have_selector('title', :text => '| Home')
+		end
+		
 	end					
 
 	describe "Help page" do
@@ -26,7 +34,7 @@ describe "Static pages" do
 		it "should have the title 'Help'" do
 			visit '/static_pages/help'
 			page.should have_selector('title',
-							:text => "Chatter Application | Help")
+							:text => "#{base_title} | Help")
 		end
 	end
 
@@ -40,8 +48,23 @@ describe "Static pages" do
 		it "should have the title 'About Chatter'" do
 			visit '/static_pages/about'
 			page.should have_selector('title',
-							:text => "Chatter Application | About")
+							:text => "#{base_title} | About")
 		end					
 	end
-
+	
+	describe "Contact page" do
+		
+		it "should have the h1 'Contact Us'" do
+			visit '/static_pages/contact'
+			page.should have_selector('h1', :text => "Contact Us")
+		end
+		
+		it "should have the title 'Contact Us'" do
+			visit '/static_pages/contact'
+			page.should have_selector('title', 
+							:text => "#{base_title} | Contact Us")
+			
+		end	
+	end
+	
 end
