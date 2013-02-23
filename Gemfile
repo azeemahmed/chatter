@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.9'
 gem 'bootstrap-sass', '2.0.0'
 gem 'bcrypt-ruby', '3.0.1'
+gem 'gravatar_image_tag'
 
 group :development, :test do
   gem "sqlite3-ruby", :require => "sqlite3"
@@ -35,6 +36,7 @@ gem 'jquery-rails'
 
 group :test do
 gem 'capybara'
+gem 'factory_girl_rails', '1.4.0'
 end
 
 # To use ActiveModel has_secure_password
