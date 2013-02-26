@@ -22,6 +22,7 @@ describe User do
   it{should respond_to(:password_digest)}
   it{should respond_to(:password)}
   it{should respond_to(:password_confirmation)}
+  it {should respond_to(:remember_token) }
   it{should respond_to(:authenticate)}
   
   it { should be_valid }
@@ -113,6 +114,27 @@ describe User do
         it { should_not == user_for_invalid_password }
         specify { user_for_invalid_password.should be_false }
       end
+      
+      describe "after submission" do
+        before { click_button submit }
+        it { should have_selector('title', text: 'Sign up') }
+        it { should have_content('error') }
+      end
+      
+      
+      describe "after saving the user" do
+        before { click_button submit }
+        let(:user) { User.find_by_email('user@example.com') }
+        it { should have_selector('title', text: user.name) }
+        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+      end
+      
+      
+      describe "remember token" do
+        before { @user.save }
+        its(:remember_token) { should_not be_blank }
+      end
+      
     end
       
   
